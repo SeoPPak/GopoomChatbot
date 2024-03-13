@@ -1,18 +1,22 @@
-var oauth = require('./oauth');
 const {google} = require('googleapis');
+var {authorize} = require('./index');
 
 async function addEvent(auth, session, room, startTime, endTime){
     const calendar = google.calendar({version: 'v3', auth});
+    
+    console.log(auth);
 
+    /*
     session = '일렉';
     room = '합주실';
-        
+    
     startTime = Date.now();
     endTime = Date.now() + 7200000;
     console.log(`session: ${session}`);
     console.log(`room: ${room}`);
     var startTimeUTC = new Date(startTime);
     var endTimeUTC = new Date(endTime);
+    */
 
     var colorID;
     var eventName;
@@ -69,13 +73,33 @@ async function addEvent(auth, session, room, startTime, endTime){
     //console.log(res);
 }
 
-var input_session;
-var input_room;
-var input_sT;
-var input_eT;   
 
-input_session = '일렉';
-input_room = '합주실';
-input_sT = Date.now();
-input_eT = Date.now() + 7200000;
-oauth.authorize().then(addEvent).catch(console.error);
+module.exports = apiRouter => {
+    apiRouoter.post('/addEvent', function(req, res){
+        var input_session;
+        var input_room;
+        var input_sT;
+        var input_eT;
+
+        /*
+        input_session = '일렉';
+        input_room = '합주실';
+        input_sT = Date.now();
+        input_eT = Date.now() + 7200000;
+        */
+
+        ////*
+        const params = req.body.action['params'] || {}
+        const input_session = params['book_session'] || ''
+        const input_room = params['book_room'] || ''
+        const input_sT = params['book_startDateTime'] || ''
+        const input_eT = params['book_endDateTime'] || ''
+        //*/
+        
+        var client;
+        authorize().then((auth)=> {
+            client = auth;
+            addEvent(client, input_session, input_room, input_sT, input_eT)
+        }).catch(console.error);
+    })
+}

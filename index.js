@@ -1,3 +1,13 @@
+const express = require('express');
+const app = express();
+const logger = require('morgan');
+
+const apiRouter = express.Router();
+
+app.use(logger('dev', {}));
+app.use(express.json());
+app.use('/api', apiRouter);
+
 const fs = require('fs').promises;
 const path = require('path');
 const process = require('process');
@@ -53,6 +63,8 @@ async function saveCredentials(client) {
 async function authorize() {
   let client = await loadSavedCredentialsIfExist();
   if (client) {
+    console.log('client');
+    console.log(client);
     return client;
   }
   client = await authenticate({

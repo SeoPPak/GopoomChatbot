@@ -10,6 +10,7 @@ async function listEvents(auth) {
   const res = await calendar.events.list({
     calendarId: 'primary',
     timeMin: new Date().toISOString(),//시작일자
+    timeMax: new Date().toISOString(),//종료일자
     singleEvents: true,
     orderBy: 'startTime',
   });
