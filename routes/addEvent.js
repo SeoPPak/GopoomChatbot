@@ -1,5 +1,5 @@
 const {google} = require('googleapis');
-var {authorize} = require('./index');
+var {authorize} = require('./oauth');
 
 async function addEvent(auth, session, room, startTime, endTime){
     const calendar = google.calendar({version: 'v3', auth});
@@ -55,17 +55,17 @@ async function addEvent(auth, session, room, startTime, endTime){
     var event = {
         "summary": eventName,
         "start": {
-            "dateTime": startTimeUTC,
+            "dateTime": startTime,
             "timeZone": "Asia/Seoul"
         },
         "end" : {
-            "dateTime": endTimeUTC,
+            "dateTime": endTime,
             "timeZone": "Asia/Seoul"
         },
         "colorId": colorID
     };
 
-    var res = await calendar.events.insert({
+    await calendar.events.insert({
         "calendarId": 'primary',
         "resource" : event
         }
@@ -75,31 +75,37 @@ async function addEvent(auth, session, room, startTime, endTime){
 
 
 module.exports = apiRouter => {
-    apiRouoter.post('/addEvent', function(req, res){
+    console.log("addevent")
+    apiRouter.post('/addevent', function(req, res){
         var input_session;
         var input_room;
         var input_sT;
         var input_eT;
 
-        /*
+        ///*
         input_session = '일렉';
         input_room = '합주실';
         input_sT = Date.now();
         input_eT = Date.now() + 7200000;
-        */
+        //*/
 
-        ////*
+        /*
         const params = req.body.action['params'] || {}
         const input_session = params['book_session'] || ''
         const input_room = params['book_room'] || ''
         const input_sT = params['book_startDateTime'] || ''
         const input_eT = params['book_endDateTime'] || ''
-        //*/
+        */
         
         var client;
         authorize().then((auth)=> {
             client = auth;
             addEvent(client, input_session, input_room, input_sT, input_eT)
         }).catch(console.error);
+
+        responseBody = {
+            version: "2.0",
+        };
+        res.status(200).send(responseBody);
     })
 }

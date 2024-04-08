@@ -1,16 +1,22 @@
 {
   "dependencies": {
     "@google-cloud/local-auth": "^2.1.0",
+    "body-parser": "^1.20.2",
+    "config": "^3.3.11",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.3",
     "googleapis": "^105.0.0",
-    "morgan": "^1.10.0"
+    "jade": "^1.9.2",
+    "morgan": "^1.10.0",
+    "static-favicon": "^2.0.0-alpha"
   },
   "name": "gopoomchatbot",
   "version": "1.0.0",
   "description": "kakaotalk chatbot writen in node.js",
-  "main": "index.js",
+  "main": "./bin/www.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodejs ./bin/www"
   },
   "repository": {
     "type": "git",

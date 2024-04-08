@@ -9,8 +9,9 @@ async function listEvents(auth) {
   const calendar = google.calendar({version: 'v3', auth});
   const res = await calendar.events.list({
     calendarId: 'primary',
+    maxResults: 10,
     timeMin: new Date().toISOString(),//시작일자
-    timeMax: new Date().toISOString(),//종료일자
+    //timeMax: new Date().toISOString(),//종료일자
     singleEvents: true,
     orderBy: 'startTime',
   });
