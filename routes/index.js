@@ -12,4 +12,6 @@ app.use(logger('dev', {}));
 app.use(express.json());
 app.use('/api', apiRouter);
 
+console.log('routes/index excuted');
+
 module.exports = apiRouter;

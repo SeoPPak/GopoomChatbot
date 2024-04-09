@@ -1,8 +1,9 @@
 const routerName = '/test'
+const router = require('express').Router();
 
-module.exports = apiRouter => {
-    console.log("test executed");
-    apiRouter.get(routerName, function(req, res){
-        res.send('hello world');
-    })
-}
+router.get(routerName, function(req, res){
+    console.log('test executed');
+    res.send('hello world');
+})
+
+module.exports = router

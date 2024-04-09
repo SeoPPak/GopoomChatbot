@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var app = express()
 
+
+const apiRouter = express.Router();
+
+
 const addevent = require('./routes/addEvent')
 const filter = require('./routes/filter')
 const test = require('./routes/test')
@@ -20,9 +24,10 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/addevent', addevent)
-//app.use('/filter', filter)
-app.use('/test', test)
+
+app.use('/', addevent)
+app.use('/', filter)
+app.use('/', test)
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

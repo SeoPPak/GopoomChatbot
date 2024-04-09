@@ -6,7 +6,7 @@ const app = express()
 const logger = require('morgan');
 const addEvent = require('./routes/addEvent');
 const test = require('./routes/test');
-//const filter = require('./routes/filter');
+const filter = require('./routes/filter');
 
 const apiRouter = express.Router();
 

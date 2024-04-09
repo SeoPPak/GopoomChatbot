@@ -3,9 +3,6 @@ var {authorize} = require('./oauth');
 
 async function addEvent(auth, session, room, startTime, endTime){
     const calendar = google.calendar({version: 'v3', auth});
-    
-    console.log(auth);
-
     /*
     session = '일렉';
     room = '합주실';
@@ -14,12 +11,12 @@ async function addEvent(auth, session, room, startTime, endTime){
     endTime = Date.now() + 7200000;
     console.log(`session: ${session}`);
     console.log(`room: ${room}`);
-    var startTimeUTC = new Date(startTime);
-    var endTimeUTC = new Date(endTime);
     */
 
     var colorID;
     var eventName;
+    var startTimeUTC = new Date(startTime);
+    var endTimeUTC = new Date(endTime);
     
     switch(session){
         case '일렉':
@@ -55,11 +52,11 @@ async function addEvent(auth, session, room, startTime, endTime){
     var event = {
         "summary": eventName,
         "start": {
-            "dateTime": startTime,
+            "dateTime": startTimeUTC,
             "timeZone": "Asia/Seoul"
         },
         "end" : {
-            "dateTime": endTime,
+            "dateTime": endTimeUTC,
             "timeZone": "Asia/Seoul"
         },
         "colorId": colorID
@@ -70,42 +67,49 @@ async function addEvent(auth, session, room, startTime, endTime){
         "resource" : event
         }
     );
-    //console.log(res);
 }
 
+const router = require('express').Router();
 
-module.exports = apiRouter => {
-    console.log("addevent")
-    apiRouter.post('/addevent', function(req, res){
-        var input_session;
-        var input_room;
-        var input_sT;
-        var input_eT;
+router.get('/addevent', function(req, res){
+    console.log('addevent excuted');
+    var input_session;
+    var input_room;
+    var input_sT;
+    var input_eT;
 
-        ///*
-        input_session = '일렉';
-        input_room = '합주실';
-        input_sT = Date.now();
-        input_eT = Date.now() + 7200000;
-        //*/
+    /*
+    input_session = '일렉';
+    input_room = '합주실';
+    input_sT = Date.now();
+    input_eT = Date.now() + 7200000;
+    */
 
-        /*
-        const params = req.body.action['params'] || {}
-        const input_session = params['book_session'] || ''
-        const input_room = params['book_room'] || ''
-        const input_sT = params['book_startDateTime'] || ''
-        const input_eT = params['book_endDateTime'] || ''
-        */
+    ///*
+    const params = req.body.action['params'] || {}
+    const input_session = params['book_session'] || ''
+    const input_room = params['book_room'] || ''
+    const input_sT = params['book_startDateTime'] || ''
+    const input_eT = params['book_endDateTime'] || ''
+    //*/
         
-        var client;
-        authorize().then((auth)=> {
-            client = auth;
-            addEvent(client, input_session, input_room, input_sT, input_eT)
-        }).catch(console.error);
+    var client;
+    authorize().then((auth)=> {
+        client = auth;
+        addEvent(client, input_session, input_room, input_sT, input_eT)
+    }).catch(console.error);
 
-        responseBody = {
-            version: "2.0",
-        };
-        res.status(200).send(responseBody);
-    })
-}
+
+    responseBody = {
+        version: "2.0",
+        session: input_session,
+        romm: input_room,
+        start_time: input_sT,
+        end_time: input_eT,
+        message: "successfully reservated"
+    };
+
+    res.status(200).send(responseBody);
+})
+
+module.exports = router;

@@ -5,7 +5,7 @@ const {google} = require('googleapis');
  * Lists the next 10 events on the user's primary calendar.
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-async function listEvents(auth) {
+async function listEvents(auth, response) {
   const calendar = google.calendar({version: 'v3', auth});
   const res = await calendar.events.list({
     calendarId: 'primary',
@@ -21,10 +21,27 @@ async function listEvents(auth) {
     return;
   }
   console.log(`Events at ${res.timeMin} ~ ${res.timeMax}`);
+  
+  var eventList = [];
   events.map((event, i) => {
     const start = event.start.dateTime || event.start.date;
-    console.log(`${start} - ${event.summary}`);
+    eventList.push({"start":start, "summary":event.summary});
   });
+  response.json(eventList);
 }
 
-oauth.authorize().then(listEvents).catch(console.error);
+
+
+
+const routerName = '/test'
+const router = require('express').Router();
+
+router.get('/filter', function(req, res){
+    oauth.authorize().then((auth) =>{
+      client = auth;
+      listEvents(client, res);
+    }).catch(console.error);
+  }
+)
+
+module.exports = router;
