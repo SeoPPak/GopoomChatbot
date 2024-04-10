@@ -13,6 +13,13 @@ async function addEvent(auth, session, room, startTime, endTime){
     console.log(`room: ${room}`);
     */
 
+    if (startTime = '')
+        startTime = Date.now();
+    if (endTime = '')
+        endTime = Date.now() + 7200000;
+
+
+
     var colorID;
     var eventName;
     var startTimeUTC = new Date(startTime);
@@ -78,20 +85,20 @@ router.get('/addevent', function(req, res){
     var input_sT;
     var input_eT;
 
-    ///*
+    /*
     input_session = '베이스';
     input_room = '합주실';
     input_sT = Date.now();
     input_eT = Date.now() + 7200000;
-    //*/
+    */
 
-    /*
+    ///*
     const params = req.body.action['params'] || {}
     input_session = params['book_session'] || ''
     input_room = params['book_room'] || ''
     input_sT = params['book_startDateTime'] || ''
     input_eT = params['book_endDateTime'] || ''
-    */
+    //*/
         
     var client;
     authorize().then((auth)=> {
