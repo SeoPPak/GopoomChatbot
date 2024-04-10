@@ -7,7 +7,7 @@ router.get(routerName, function(req, res){
     resBody = {
         "response": {
           "template": {
-            "outputs": "helloworld"
+            "outputs": ["helloworld"]
           },
           "version": "2.0" 
         }
