@@ -111,13 +111,22 @@ async function listEvents(auth, response, session, room, date) {
 
   console.log(`Events at ${res.timeMin} ~ ${res.timeMax}`);
   
-
+  
   var eventList = [];
   events.map((event, i) => {
     const start = event.start.dateTime || event.start.date;
     eventList.push({"start":start, "summary":event.summary});
-  })  ;
-  response.json(eventList);
+  });
+  resBody = {
+    "response": {
+      "template": {
+        "outputs": eventList
+      },
+      "version": "2.0" 
+    }
+  }
+
+  response.json(resBody);
 }
 
 
