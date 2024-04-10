@@ -16,7 +16,7 @@
   "main": "./bin/www.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodejs ./bin/www"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
