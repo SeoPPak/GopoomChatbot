@@ -3,7 +3,17 @@ const router = require('express').Router();
 
 router.get(routerName, function(req, res){
     console.log('test executed');
-    res.send('hello world');
+
+    resBody = {
+        "response": {
+          "template": {
+            "outputs": "helloworld"
+          },
+          "version": "2.0" 
+        }
+      }
+
+    res.send(resBody);
 })
 
 module.exports = router
