@@ -78,20 +78,20 @@ router.get('/addevent', function(req, res){
     var input_sT;
     var input_eT;
 
-    /*
-    input_session = '일렉';
+    ///*
+    input_session = '베이스';
     input_room = '합주실';
     input_sT = Date.now();
     input_eT = Date.now() + 7200000;
-    */
-
-    ///*
-    const params = req.body.action['params'] || {}
-    const input_session = params['book_session'] || ''
-    const input_room = params['book_room'] || ''
-    const input_sT = params['book_startDateTime'] || ''
-    const input_eT = params['book_endDateTime'] || ''
     //*/
+
+    /*
+    const params = req.body.action['params'] || {}
+    input_session = params['book_session'] || ''
+    input_room = params['book_room'] || ''
+    input_sT = params['book_startDateTime'] || ''
+    input_eT = params['book_endDateTime'] || ''
+    */
         
     var client;
     authorize().then((auth)=> {
