@@ -13,6 +13,9 @@ async function addEvent(auth, session, room, startTime, endTime){
     console.log(`room: ${room}`);
     */
 
+    console.log(`startTime: ${startTime}`);
+    console.log(`endTime: ${endTime}`);
+
     if (startTime == '')
         startTime = new Date.now();
     if (endTime == '')
@@ -22,8 +25,11 @@ async function addEvent(auth, session, room, startTime, endTime){
 
     var colorID;
     var eventName;
-    var startTimeUTC = new Date(startTime);
-    var endTimeUTC = new Date(endTime);
+    var startTimeUTC = Date(startTime);
+    var endTimeUTC = Date(endTime);
+
+    console.log(`startTimeUTC: ${startTimeUTC}`);
+    console.log(`endTimeUTC: ${endTimeUTC}`);
     
     switch(session){
         case '일렉':
