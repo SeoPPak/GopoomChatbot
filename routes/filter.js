@@ -82,9 +82,13 @@ async function listEvents(auth, response, session, room, date) {
     min = new Date(Date.now()).toISOString();
     max = new Date(Date.now() + (3600000 * 24)).toISOString();
   }else{
-    min = date;
-    max = new Date(min) + (3600000 * 24)
-    max = new Date(min).toISOString();
+    date = new Date(date);
+    date.setHours(date.getHours() + 9);
+    min = date.toISOString();
+
+    max = new Date(min);
+    max.setDate(date.getDate() + 1);
+    max = max.toISOString();
   }
 
   console.log(`min: ${min}`);
