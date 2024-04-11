@@ -150,7 +150,7 @@ router.post('/filter', function(req, res){
   const params = req.body.action["params"] || {};
   input_session = params['check_session'] || '';
   input_room = params['check_room'] || '';
-  input_date = params['check_date'] || '';
+  input_date = params['check_date']['value'] || '';
 
 
   console.log(`input_session: ${input_session}`);

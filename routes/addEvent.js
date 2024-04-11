@@ -25,8 +25,8 @@ async function addEvent(auth, session, room, startTime, endTime){
 
     var colorID;
     var eventName;
-    var startTimeUTC = startTime['value'];
-    var endTimeUTC = endTime['value'];
+    var startTimeUTC = startTime;
+    var endTimeUTC = endTime;
 
     console.log(`startTimeUTC: ${startTimeUTC}`);
     console.log(`endTimeUTC: ${endTimeUTC}`);
@@ -102,8 +102,8 @@ router.post('/addevent', function(req, res){
     const params = req.body.action['params'] || {}
     input_session = params['book_session'] || ''
     input_room = params['book_room'] || ''
-    input_sT = params['book_startDateTime'] || ''
-    input_eT = params['book_endDateTime'] || ''
+    input_sT = params['book_startDateTime']['value'] || ''
+    input_eT = params['book_endDateTime']['value'] || ''
     //*/
         
     var client;
