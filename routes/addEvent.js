@@ -17,18 +17,16 @@ async function addEvent(auth, session, room, startTime, endTime){
 
     if (startTime == ''){
         startTime = Date.now();
-        startTime = new Date(startTime).toISOString();
     }
     if (endTime == ''){
         endTime = (Date.now() + 7200000);
-        endTime = new Date(endTime).toISOString();
     }
 
 
     var colorID;
     var eventName;
-    var startTimeUTC = startTime;
-    var endTimeUTC = endTime;
+    var startTimeUTC = new Date(startTime).toISOString();
+    var endTimeUTC = new Date(endTime).toISOString();
 
     console.log(`startTimeUTC: ${startTimeUTC}`);
     console.log(`endTimeUTC: ${endTimeUTC}`);
