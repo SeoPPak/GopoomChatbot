@@ -105,8 +105,8 @@ router.post('/addevent', function(req, res){
     input_eT = params['book_endDateTime'] || ''
     //*/
 
-    console.log(`startTime: ${startTime}`);
-    console.log(`endTime: ${endTime}`);
+    console.log(`startTime: ${input_sT}`);
+    console.log(`endTime: ${input_eT}`);
         
     var client;
     authorize().then((auth)=> {
