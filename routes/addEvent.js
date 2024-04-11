@@ -15,11 +15,14 @@ async function addEvent(auth, session, room, startTime, endTime){
 
     
 
-    if (startTime == '')
-        startTime = new Date.now();
-    if (endTime == '')
-        endTime = new (Date(startTime) + 7200000);
-
+    if (startTime == ''){
+        startTime = Date.now();
+        startTime = new Date(startTime).toISOString();
+    }
+    if (endTime == ''){
+        endTime = (Date.now() + 7200000);
+        endTime = new Date(endTime).toISOString();
+    }
 
 
     var colorID;
@@ -89,6 +92,8 @@ router.post('/addevent', function(req, res){
     var input_room;
     var input_sT;
     var input_eT;
+    var start;
+    var end;
 
     /*
     input_session = '베이스';
@@ -105,13 +110,23 @@ router.post('/addevent', function(req, res){
     input_eT = params['book_endDateTime'] || ''
     //*/
 
-    console.log(`startTime: ${input_sT["value"]}`);
-    console.log(`endTime: ${input_eT}`);
+    if(input_sT != '')
+        start = input_sT['value'];
+    else
+        start = '';
+
+    if(input_eT != '')
+        end = input_eT['value'];
+    else
+        end = '';
+
+    console.log(`startTime: ${start}`);
+    console.log(`endTime: ${end}`);
         
     var client;
     authorize().then((auth)=> {
         client = auth;
-        addEvent(client, input_session, input_room, input_sT, input_eT)
+        addEvent(client, input_session, input_room, start, end)
     }).catch(console.error);
 
 

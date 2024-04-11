@@ -79,11 +79,11 @@ async function listEvents(auth, response, session, room, date) {
   
   var min, max;  
   if (date == ''){
-    min = new Date(Date.now());
-    max = new Date(Date.now() + (3600000 * 24));
+    min = new Date(Date.now()).toISOString();
+    max = new Date(Date.now() + (3600000 * 24)).toISOString();
   }else{
-    min = date['value'];
-    max = new Date(min + (3600000 * 24))
+    min = date;
+    max = new Date(min + (3600000 * 24)).toISOString();
   }
 
   console.log(`min: ${min}`);
@@ -146,12 +146,17 @@ const router = require('express').Router();
 router.post('/filter', function(req, res){
   var input_session;
   var input_room;
+  var date;
   ///*
   const params = req.body.action["params"] || {};
   input_session = params['check_session'] || '';
   input_room = params['check_room'] || '';
-  input_date = params['check_date']['value'] || '';
+  input_date = params['check_date'] || '';
 
+  if (input_date != '')
+    date = input_date['value'];
+  else
+    date = '';
 
   console.log(`input_session: ${input_session}`);
   console.log(`input_room: ${input_room}`);
@@ -166,7 +171,7 @@ router.post('/filter', function(req, res){
 
   oauth.authorize().then((auth) =>{
     client = auth;
-    listEvents(client, res, input_session, input_room, input_date);
+    listEvents(client, res, input_session, input_room, date);
   }).catch(console.error);
 })
 
