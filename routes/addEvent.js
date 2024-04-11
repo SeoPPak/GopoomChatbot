@@ -101,8 +101,8 @@ router.post('/addevent', function(req, res){
     const params = req.body.action['params'] || {}
     input_session = params['book_session'] || ''
     input_room = params['book_room'] || ''
-    input_sT = params['book_startDateTime']["value"] || ''
-    input_eT = params['book_endDateTime']["value"] || ''
+    input_sT = params['book_startDateTime'] || ''
+    input_eT = params['book_endDateTime'] || ''
     //*/
 
     console.log(`startTime: ${startTime}`);
