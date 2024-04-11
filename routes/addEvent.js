@@ -25,8 +25,8 @@ async function addEvent(auth, session, room, startTime, endTime){
 
     var colorID;
     var eventName;
-    var startTimeUTC = Date(startTime);
-    var endTimeUTC = Date(endTime);
+    var startTimeUTC = startTime.value;
+    var endTimeUTC = endTime.value;
 
     console.log(`startTimeUTC: ${startTimeUTC}`);
     console.log(`endTimeUTC: ${endTimeUTC}`);

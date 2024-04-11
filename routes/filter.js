@@ -82,11 +82,12 @@ async function listEvents(auth, response, session, room, date) {
     min = new Date(Date.now());
     max = new Date(Date.now() + (3600000 * 24));
   }else if (romm = "대기실"){
-    min = new Date(date);
-    max = new (Date(date) + (3600000 * 24))
+    min = date.value;
+    max = new Date(min + (3600000 * 24))
   }
 
   console.log(`min: ${min}`);
+  console.log(`max: ${max}`);
 
   option.timeMin = min;
   option.timeMax = max;
