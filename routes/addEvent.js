@@ -78,7 +78,7 @@ async function addEvent(auth, session, room, startTime, endTime){
 
 const router = require('express').Router();
 
-router.get('/addevent', function(req, res){
+router.post('/addevent', function(req, res){
     console.log('addevent excuted');
     var input_session;
     var input_room;

@@ -137,7 +137,7 @@ const router = require('express').Router();
 
 
 
-router.get('/filter', function(req, res){
+router.post('/filter', function(req, res){
   var input_session;
   var input_room;
   ///*
