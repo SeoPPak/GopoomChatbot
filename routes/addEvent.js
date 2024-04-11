@@ -16,7 +16,7 @@ async function addEvent(auth, session, room, startTime, endTime){
     if (startTime == '')
         startTime = Date.now();
     if (endTime == '')
-        endTime = Date.now() + 7200000;
+        endTime = startTime + 7200000;
 
 
 
