@@ -73,15 +73,20 @@ async function listEvents(auth, response, session, room, date) {
     }
     option.q = `${eventName}*`;
   }
+
+  
+  console.log(`date: ${date}`);
   
   var min, max;  
   if (date == ''){
     min = new Date(Date.now());
     max = new Date(Date.now() + (3600000 * 24));
-  }else{
+  }else if (romm = "대기실"){
     min = new Date(date);
-    max = new(Date(date) + (3600000 * 24))
+    max = new (Date(date) + (3600000 * 24))
   }
+
+  console.log(`min: ${min}`);
 
   option.timeMin = min;
   option.timeMax = max;
@@ -145,6 +150,7 @@ router.post('/filter', function(req, res){
   input_session = params['check_session'] || '';
   input_room = params['check_room'] || '';
   input_date = params['check_date'] || '';
+
 
   console.log(`input_session: ${input_session}`);
   console.log(`input_room: ${input_room}`);

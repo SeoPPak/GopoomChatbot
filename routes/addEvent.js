@@ -14,9 +14,9 @@ async function addEvent(auth, session, room, startTime, endTime){
     */
 
     if (startTime == '')
-        startTime = Date.now();
+        startTime = new Date.now();
     if (endTime == '')
-        endTime = Date.now() + 7200000;
+        endTime = new (Date(startTime) + 7200000);
 
 
 
@@ -50,7 +50,7 @@ async function addEvent(auth, session, room, startTime, endTime){
     var add;
     if(room = "합주실"){
         add = "🎼";
-    }else{
+    }else if (romm = "대기실"){
         colorID = 1;
         add = "🎚️";
     }
