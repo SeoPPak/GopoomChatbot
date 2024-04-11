@@ -13,8 +13,7 @@ async function addEvent(auth, session, room, startTime, endTime){
     console.log(`room: ${room}`);
     */
 
-    console.log(`startTime: ${startTime}`);
-    console.log(`endTime: ${endTime}`);
+    
 
     if (startTime == '')
         startTime = new Date.now();
@@ -102,9 +101,12 @@ router.post('/addevent', function(req, res){
     const params = req.body.action['params'] || {}
     input_session = params['book_session'] || ''
     input_room = params['book_room'] || ''
-    input_sT = params['book_startDateTime']['value'] || ''
-    input_eT = params['book_endDateTime']['value'] || ''
+    input_sT = params['book_startDateTime']["value"] || ''
+    input_eT = params['book_endDateTime']["value"] || ''
     //*/
+
+    console.log(`startTime: ${startTime}`);
+    console.log(`endTime: ${endTime}`);
         
     var client;
     authorize().then((auth)=> {
