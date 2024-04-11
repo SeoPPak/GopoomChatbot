@@ -36,7 +36,7 @@ async function listEvents(auth, response, session, room, date) {
 
     if(room = "합주실"){
         eventName = `🎼${eventName}`;
-    }else{
+    }else if (romm = "대기실"){
         eventName = `🎚️${eventName}`;
     }
 
@@ -67,7 +67,7 @@ async function listEvents(auth, response, session, room, date) {
     var eventName;
     if(room = "합주실"){
       eventName = "🎼";
-    }else{
+    }else if (romm = "대기실"){
       colorID = 1;
       eventName = "🎚️";
     }
@@ -81,8 +81,8 @@ async function listEvents(auth, response, session, room, date) {
   if (date == ''){
     min = new Date(Date.now());
     max = new Date(Date.now() + (3600000 * 24));
-  }else if (romm = "대기실"){
-    min = date.value;
+  }else{
+    min = date['value'];
     max = new Date(min + (3600000 * 24))
   }
 
