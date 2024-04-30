@@ -129,13 +129,19 @@ router.post('/addevent', function(req, res){
 
 
     responseBody = {
-        version: "2.0",
-        session: input_session,
-        romm: input_room,
-        start_time: input_sT,
-        end_time: input_eT,
-        message: "successfully reservated"
-    };
+        "response": {
+          "template": {
+            "outputs": [{
+                "session": input_session,
+                "room": input_room,
+                "start_time": input_sT,
+                "end_time": input_eT,
+                "message": "successfully reservated"
+            }]
+          },
+          "version": "2.0" 
+        }
+      };
 
     res.status(200).send(responseBody);
 })
